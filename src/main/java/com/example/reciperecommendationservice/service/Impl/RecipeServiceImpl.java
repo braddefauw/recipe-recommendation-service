@@ -24,21 +24,33 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe getRecipeById(Long id) {
-        return null;
+        Recipe recipe = recipeRepository.findById(id).orElse(null);
+        return recipe;
     }
 
     @Override
     public Recipe createRecipe(Recipe recipe) {
-        return null;
+        recipeRepository.save(recipe);
+        return recipe;
     }
 
     @Override
     public Recipe updateRecipe(Long id, Recipe updatedRecipe) {
-        return null;
+        Recipe recipe = recipeRepository.findById(id).orElse(null);
+        if (recipe != null) {
+            recipe.setName(updatedRecipe.getName());
+            recipe.setDescription(updatedRecipe.getDescription());
+            recipeRepository.save(recipe);
+        }
+        return recipe;
     }
 
     @Override
     public Recipe deleteRecipe(Long id) {
-        return null;
+        Recipe recipe = recipeRepository.findById(id).orElse(null);
+        if (recipe != null) {
+            recipeRepository.delete(recipe);
+        }
+        return recipe;
     }
 }
